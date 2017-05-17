@@ -22,15 +22,21 @@ public class LiftOff implements Runnable {
 		while(countDown-- > 0){
 			System.out.println(status());
 			Thread.yield();
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 	}
 
 	public static void main(String[] args) {
-		ExecutorService exes = Executors.newFixedThreadPool(2);
+		ExecutorService exes = Executors.newCachedThreadPool();
 		for(int i = 0; i<4; i++){
 			exes.execute(new LiftOff());
 		}
-		exes.shutdown();
+		exes.shutdown();//这个表明不在接受新的线程任务
 			
 	}
 
