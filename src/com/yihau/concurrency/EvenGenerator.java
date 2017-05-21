@@ -6,6 +6,7 @@ package com.yihau.concurrency;
  * 这是因为所有消费者共享一个currentEvenValue，大家都在改变该变量的值，这是不正确的
  * 访问资源造成的。
  * @author UMC-yihau
+ * 
  *
  */
 public class EvenGenerator extends IntGenerator{
@@ -14,9 +15,11 @@ public class EvenGenerator extends IntGenerator{
 		// TODO Auto-generated method stub
 		EvenChecker.test(new EvenGenerator());
 	}
-
+/**
+ * 加入synchronized关键字，防止方法被多个线程同时调用
+ */
 	@Override
-	public int next() {
+	public synchronized int next() {
 		// TODO Auto-generated method stub
 		++currentEvenValue;
 		Thread.yield();
